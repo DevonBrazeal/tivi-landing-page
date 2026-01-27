@@ -1,7 +1,9 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
+import LifeCompanion from './components/LifeCompanion';
 import ThreeEconomies from './components/ThreeEconomies';
+import TiviScore from './components/TiviScore';
 import EarnSection from './components/EarnSection';
 import Testimonials from './components/Testimonials';
 import Technology from './components/DePIN';
@@ -14,7 +16,9 @@ function App() {
       <Navbar />
       <Hero />
       <ProblemSolution />
+      <LifeCompanion />
       <ThreeEconomies />
+      <TiviScore />
       <EarnSection />
       <Testimonials />
       <Technology />
