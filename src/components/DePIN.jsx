@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Cpu, Globe, Radio, ShieldCheck, Activity, Bot, Database } from 'lucide-react';
@@ -153,15 +153,30 @@ export default function Technology() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={inView ? { opacity: 1, scale: 1 } : {}}
                         transition={{ duration: 0.8, delay: 0.3 }}
-                        className="hidden lg:block h-[800px] sticky top-24 rounded-3xl bg-neutral-900/20 border border-neutral-800/50 overflow-hidden"
+                        className="hidden lg:block h-[800px] sticky top-24 rounded-3xl bg-neutral-900/20 border border-neutral-800/50 overflow-hidden group/robot"
+                        onMouseMove={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            e.currentTarget.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                            e.currentTarget.style.setProperty('--y', `${e.clientY - rect.top}px`);
+                        }}
                     >
-                        <SplineScene
-                            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                            className="w-full h-full scale-100 translate-y-4"
+                        {/* Cursor Spotlight */}
+                        <div
+                            className="pointer-events-none absolute -inset-px transition-opacity opacity-0 group-hover/robot:opacity-100 z-0"
+                            style={{
+                                background: `radial-gradient(600px circle at var(--x) var(--y), rgba(255, 255, 255, 0.8), transparent 40%)`
+                            }}
                         />
+
+                        <div className="relative z-10 w-full h-full">
+                            <SplineScene
+                                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                                className="w-full h-full scale-100 translate-y-4"
+                            />
+                        </div>
                         {/* Gradient overlay to integrate with background */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none z-20" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent pointer-events-none z-20" />
                     </motion.div>
                 </div>
             </div>
