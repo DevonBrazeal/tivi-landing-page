@@ -1,9 +1,34 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Sparkles, ArrowRight, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 
 export default function LifeCompanion() {
-    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+    const ref = useRef(null);
+    const inView = useInView(ref, { margin: "-20% 0px -20% 0px", once: true });
+
+    const containerVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.05
+            }
+        }
+    };
+
+    const characterVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.4,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const textLine1 = "Intention,";
+    const textLine2 = "not Attention.";
 
     return (
         <section ref={ref} className="section-padding bg-zinc-950 relative overflow-hidden">
@@ -14,53 +39,85 @@ export default function LifeCompanion() {
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
 
                     {/* Left Column: Copy */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={inView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 w-fit">
+                    <div className="relative">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }} // Keep simple fade for the badge
+                            animate={inView ? { opacity: 1, x: 0 } : {}}
+                            transition={{ duration: 0.6 }}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 w-fit"
+                        >
                             <Sparkles className="w-4 h-4 text-amber-400" />
                             <span className="text-sm font-medium text-white/90">Your North Star</span>
-                        </div>
+                        </motion.div>
 
                         <h2 className="headline-lg text-white mb-6">
-                            Intention, <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">not Attention.</span>
+                            <motion.span
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate={inView ? "visible" : "hidden"}
+                                className="block"
+                            >
+                                {textLine1.split("").map((char, index) => (
+                                    <motion.span key={index} variants={characterVariants}>
+                                        {char}
+                                    </motion.span>
+                                ))}
+                            </motion.span>
+                            <motion.span
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate={inView ? "visible" : "hidden"}
+                                className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500"
+                            >
+                                {textLine2.split("").map((char, index) => (
+                                    <motion.span key={index} variants={characterVariants}>
+                                        {char}
+                                    </motion.span>
+                                ))}
+                            </motion.span>
                         </h2>
 
-                        <p className="body-lg text-zinc-400 mb-8">
-                            Most apps want you to stay on screen. Tivi wants you to get off it.
-                            Our AI Life Companion quietly analyzes your goals and suggests real-world actions
-                            that actually move the needle.
-                        </p>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={inView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                        >
+                            <p className="body-lg text-zinc-400 mb-8">
+                                Most apps want you to stay on screen. Tivi wants you to get off it.
+                                Our AI Life Companion quietly analyzes your goals and suggests real-world actions
+                                that actually move the needle.
+                            </p>
 
-                        <ul className="space-y-4 mb-10">
-                            {[
-                                "No doomscrolling. Just doing.",
-                                "Aligns daily actions with long-term goals.",
-                                "Proactive itineraries, not passive feeds."
-                            ].map((item, i) => (
-                                <li key={i} className="flex items-center gap-3 text-white/80">
-                                    <CheckCircle2 className="w-5 h-5 text-tivi-purple" />
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
+                            <ul className="space-y-4 mb-10">
+                                {[
+                                    "No doomscrolling. Just doing.",
+                                    "Aligns daily actions with long-term goals.",
+                                    "Proactive itineraries, not passive feeds."
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-center gap-3 text-white/80">
+                                        <CheckCircle2 className="w-5 h-5 text-tivi-purple" />
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
 
-                        <button className="flex items-center gap-2 text-white font-semibold group hover:text-amber-400 transition-colors">
-                            Meet your companion <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                        </button>
-                    </motion.div>
+                            <button className="flex items-center gap-2 text-white font-semibold group hover:text-amber-400 transition-colors">
+                                Meet your companion <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </button>
+                        </motion.div>
+                    </div>
 
                     {/* Right Column: AI UI Interface */}
                     <motion.div
                         initial={{ opacity: 0, y: 40, rotate: 2 }}
                         animate={inView ? { opacity: 1, y: 0, rotate: 0 } : {}}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative"
+                        className="relative group perspective-1000"
                     >
-                        <div className="relative z-10 bg-zinc-900 border border-white/10 rounded-3xl p-6 shadow-2xl backdrop-blur-xl">
+                        {/* Magic Card Effect: Glow on hover */}
+                        <div className="absolute -inset-0.5 bg-gradient-to-br from-tivi-purple to-amber-500 rounded-3xl opacity-20 group-hover:opacity-60 transition duration-500 blur" />
+
+                        <div className="relative z-10 bg-zinc-900 border border-white/10 rounded-3xl p-6 shadow-2xl backdrop-blur-xl hover:translate-y-[-5px] transition-transform duration-500">
                             {/* Header */}
                             <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-6">
                                 <div className="flex items-center gap-3">
@@ -86,7 +143,7 @@ export default function LifeCompanion() {
                                 </p>
 
                                 {/* Activity Card */}
-                                <div className="bg-zinc-800/50 rounded-xl p-4 border border-white/5 hover:border-white/10 transition-colors cursor-pointer group/card">
+                                <div className="bg-zinc-800/50 rounded-xl p-4 border border-white/5 hover:border-amber-500/30 transition-colors cursor-pointer group/card">
                                     <div className="flex justify-between items-start mb-3">
                                         <div>
                                             <h5 className="text-white font-semibold mb-1 group-hover/card:text-amber-400 transition-colors">Handmade Pasta 101</h5>
@@ -108,7 +165,7 @@ export default function LifeCompanion() {
                                 {/* Buttons */}
                                 <div className="grid grid-cols-2 gap-3 pt-2">
                                     <button className="py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-zinc-200 transition-colors">
-                                        Accept &RSVP
+                                        Accept & RSVP
                                     </button>
                                     <button className="py-2.5 rounded-xl bg-white/5 text-white font-medium text-sm hover:bg-white/10 transition-colors">
                                         Suggest another
@@ -118,7 +175,7 @@ export default function LifeCompanion() {
                         </div>
 
                         {/* Decor elements */}
-                        <div className="absolute -inset-4 bg-gradient-to-r from-tivi-purple/30 to-amber-500/30 blur-2xl -z-10 opacity-40 rounded-[3rem]" />
+                        <div className="absolute -inset-4 bg-gradient-to-r from-tivi-purple/30 to-amber-500/30 blur-2xl -z-10 opacity-40 rounded-[3rem] animate-pulse" />
                     </motion.div>
                 </div>
             </div>
