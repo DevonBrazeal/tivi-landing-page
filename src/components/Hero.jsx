@@ -6,7 +6,7 @@ import { Play, MapPin, Users, Calendar } from 'lucide-react';
 const activities = [
     {
         title: "Sunrise Yoga",
-        image: "/images/activity_yoga.png",
+        image: `${import.meta.env.BASE_URL}images/activity_yoga.png`,
         tag: "Wellness",
         tagColor: "bg-emerald-500",
         attendees: 12,
@@ -14,7 +14,7 @@ const activities = [
     },
     {
         title: "3v3 Basketball",
-        image: "/images/activity_basketball.png",
+        image: `${import.meta.env.BASE_URL}images/activity_basketball.png`,
         tag: "Sports",
         tagColor: "bg-tivi-purple",
         attendees: 6,
@@ -22,7 +22,7 @@ const activities = [
     },
     {
         title: "Jazz Night",
-        image: "/images/activity_jazz.png",
+        image: `${import.meta.env.BASE_URL}images/activity_jazz.png`,
         tag: "Social",
         tagColor: "bg-rose-500",
         attendees: 24,
@@ -30,7 +30,7 @@ const activities = [
     },
     {
         title: "Sourdough Class",
-        image: "/images/activity_cooking.png",
+        image: `${import.meta.env.BASE_URL}images/activity_cooking.png`,
         tag: "Learning",
         tagColor: "bg-blue-500",
         attendees: 8,
@@ -38,7 +38,7 @@ const activities = [
     },
     {
         title: "Hiking Meetup",
-        image: "/images/activity_hiking.png",
+        image: `${import.meta.env.BASE_URL}images/activity_hiking.png`,
         tag: "Adventure",
         tagColor: "bg-orange-500",
         attendees: 15,
@@ -46,7 +46,7 @@ const activities = [
     },
     {
         title: "Pottery Workshop",
-        image: "/images/activity_pottery.png",
+        image: `${import.meta.env.BASE_URL}images/activity_pottery.png`,
         tag: "Creative",
         tagColor: "bg-indigo-500",
         attendees: 10,
