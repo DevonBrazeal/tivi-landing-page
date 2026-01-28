@@ -2,7 +2,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
 import LifeCompanion from './components/LifeCompanion';
-import ThreeEconomies from './components/ThreeEconomies';
+import IntentionEconomy from './components/IntentionEconomy';
 import TiviScore from './components/TiviScore';
 import EarnSection from './components/EarnSection';
 import Testimonials from './components/Testimonials';
@@ -17,7 +17,7 @@ function App() {
       <Hero />
       <ProblemSolution />
       <LifeCompanion />
-      <ThreeEconomies />
+      <IntentionEconomy />
       <TiviScore />
       <EarnSection />
       <Testimonials />

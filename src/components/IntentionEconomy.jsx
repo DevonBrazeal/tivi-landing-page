@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-export default function ThreeEconomies() {
+export default function IntentionEconomy() {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
     const modes = [
@@ -11,11 +11,13 @@ export default function ThreeEconomies() {
     ];
 
     return (
-        <section id="modes" ref={ref} className="section-padding bg-black">
+        <section id="intention-economy" ref={ref} className="section-padding bg-black">
             <div className="max-w-[980px] mx-auto">
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="text-center mb-16">
-                    <h2 className="headline-lg text-white mb-4">Three modes. One ecosystem.</h2>
-                    <p className="body-lg">Context switching that understands your intent.</p>
+                    <h2 className="headline-lg text-white mb-4">The Intention Economy.</h2>
+                    <p className="body-lg text-zinc-400">
+                        Three modes. One ecosystem. Context switching that understands your intent.
+                    </p>
                 </motion.div>
 
                 <div className="space-y-32">
@@ -37,7 +39,7 @@ export default function ThreeEconomies() {
                             <div className="flex-1">
                                 <p className="text-sm font-medium mb-2" style={{ color: mode.color }}>{mode.subtitle}</p>
                                 <h3 className="headline-md text-white mb-4">{mode.title}</h3>
-                                <p className="body-md">{mode.description}</p>
+                                <p className="body-md text-zinc-400">{mode.description}</p>
                             </div>
                         </motion.div>
                     ))}

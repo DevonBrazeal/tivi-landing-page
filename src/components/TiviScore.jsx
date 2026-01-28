@@ -81,13 +81,41 @@ export default function TiviScore() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={inView ? { opacity: 1, y: 0 } : {}}
                                     transition={{ delay: 0.4 + (i * 0.1) }}
-                                    className={`p-3 rounded-xl border ${tier.active ? 'border-tivi-purple bg-tivi-purple/10' : 'border-white/5 bg-zinc-900'}`}
+                                    className="relative group rounded-xl overflow-hidden"
+                                    onMouseMove={(e) => {
+                                        const rect = e.currentTarget.getBoundingClientRect();
+                                        e.currentTarget.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                                        e.currentTarget.style.setProperty('--y', `${e.clientY - rect.top}px`);
+                                    }}
                                 >
-                                    <div className="flex justify-between items-center mb-1">
-                                        <span className={`text-xs font-bold ${tier.color}`}>{tier.name}</span>
-                                        {tier.active && <Zap className="w-3 h-3 text-tivi-purple fill-current" />}
+                                    {/* Magic Border */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/0 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                    <div
+                                        className="absolute inset-[1px] rounded-xl bg-zinc-900 z-10"
+                                        style={{
+                                            background: tier.active ? 'rgba(76, 29, 149, 0.2)' : 'rgba(24, 24, 27, 0.9)'
+                                        }}
+                                    />
+
+                                    {/* Spotlight */}
+                                    <div
+                                        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+                                        style={{
+                                            background: `radial-gradient(400px circle at var(--x) var(--y), rgba(255, 255, 255, 0.15), transparent 40%)`
+                                        }}
+                                    />
+
+                                    {/* Content */}
+                                    <div className={`relative z-20 p-3 h-full border border-transparent ${tier.active ? 'border-tivi-purple/50' : 'border-white/5'} rounded-xl`}>
+                                        <div className="flex justify-between items-center mb-1">
+                                            <span className={`text-xs font-bold ${tier.color}`}>{tier.name}</span>
+                                            {tier.active && <Zap className="w-3 h-3 text-tivi-purple fill-current" />}
+                                        </div>
+                                        <div className="text-white font-medium text-sm">{tier.benefits}</div>
+                                        {tier.active && (
+                                            <div className="absolute -right-2 -top-2 w-8 h-8 bg-tivi-purple/20 blur-xl rounded-full" />
+                                        )}
                                     </div>
-                                    <div className="text-white font-medium text-sm">{tier.benefits}</div>
                                 </motion.div>
                             ))}
                         </div>
