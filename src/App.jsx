@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import PhoneScrollDemo from './components/PhoneScrollDemo';
 import ProblemSolution from './components/ProblemSolution';
 import LifeCompanion from './components/LifeCompanion';
 import IntentionEconomy from './components/IntentionEconomy';
@@ -15,6 +16,7 @@ function App() {
     <main className="min-h-screen font-sans overflow-x-hidden">
       <Navbar />
       <Hero />
+      <PhoneScrollDemo />
       <ProblemSolution />
       <LifeCompanion />
       <IntentionEconomy />
