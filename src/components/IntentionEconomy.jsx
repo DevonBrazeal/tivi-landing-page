@@ -5,9 +5,9 @@ export default function IntentionEconomy() {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
     const modes = [
-        { title: 'Social Mode', subtitle: 'Find your crowd', description: 'Use Active Pulse to find pickup games, hiking groups, or book clubs nearby.', image: '/images/social-mode.png', color: '#8B5CF6', tag: 'Tivi Purple', tagColor: 'bg-tivi-purple', time: 'Today @ 5:00 PM', eventTitle: '3v3 Pickup Game', eventSubtitle: '1.2 mi away', cta: 'Join Game' },
-        { title: 'Dating Mode', subtitle: 'Date by itinerary', description: 'Skip the chatting. Browse date cards. Match on shared interests.', image: '/images/dating-mode.png', color: '#34D399', tag: 'Soft Mint', tagColor: 'bg-mode-dating', time: 'Tonight @ 8:00 PM', eventTitle: 'Blue Note Jazz & Cocktails', eventSubtitle: 'Perfect for conversation', cta: 'View Itinerary' },
-        { title: 'Growth Mode', subtitle: 'Level up your life', description: 'Learn pasta in Rome via stream, then host a dinner party locally.', image: '/images/growth-mode.png', color: '#60A5FA', tag: 'Slate Blue', tagColor: 'bg-mode-growth', time: 'Tomorrow @ 10:00 AM', eventTitle: 'Sourdough Masterclass', eventSubtitle: 'Virtual & Local Circles', cta: 'Enroll & Connect' },
+        { title: 'Social Mode', subtitle: 'Find your crowd', description: 'Use Active Pulse to find pickup games, hiking groups, or book clubs nearby.', image: `${import.meta.env.BASE_URL}images/social-mode.png`, color: '#8B5CF6', tag: 'Tivi Purple', tagColor: 'bg-tivi-purple', time: 'Today @ 5:00 PM', eventTitle: '3v3 Pickup Game', eventSubtitle: '1.2 mi away', cta: 'Join Game' },
+        { title: 'Dating Mode', subtitle: 'Date by itinerary', description: 'Skip the chatting. Browse date cards. Match on shared interests.', image: `${import.meta.env.BASE_URL}images/dating-mode.png`, color: '#34D399', tag: 'Soft Mint', tagColor: 'bg-mode-dating', time: 'Tonight @ 8:00 PM', eventTitle: 'Blue Note Jazz & Cocktails', eventSubtitle: 'Perfect for conversation', cta: 'View Itinerary' },
+        { title: 'Growth Mode', subtitle: 'Level up your life', description: 'Learn pasta in Rome via stream, then host a dinner party locally.', image: `${import.meta.env.BASE_URL}images/growth-mode.png`, color: '#60A5FA', tag: 'Slate Blue', tagColor: 'bg-mode-growth', time: 'Tomorrow @ 10:00 AM', eventTitle: 'Sourdough Masterclass', eventSubtitle: 'Virtual & Local Circles', cta: 'Enroll & Connect' },
     ];
 
     return (
