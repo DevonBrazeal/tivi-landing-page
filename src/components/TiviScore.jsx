@@ -1,123 +1,59 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Trophy, Star, Zap, Crown, TrendingUp } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function TiviScore() {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
-    const [score, setScore] = useState(0);
 
-    // Animated counter effect
+    // Animated counter using Framer Motion springs
+    const count = useMotionValue(0);
+    const rounded = useTransform(count, (latest) => Math.round(latest));
+
     useEffect(() => {
         if (inView) {
-            const duration = 2000;
-            const steps = 60;
-            const stepTime = duration / steps;
-            const targetScore = 784;
-            let current = 0;
-
-            const timer = setInterval(() => {
-                current += targetScore / steps;
-                if (current >= targetScore) {
-                    setScore(targetScore);
-                    clearInterval(timer);
-                } else {
-                    setScore(Math.floor(current));
-                }
-            }, stepTime);
-
-            return () => clearInterval(timer);
+            const controls = animate(count, 784, { duration: 2, ease: "easeOut" });
+            return controls.stop;
         }
     }, [inView]);
 
-    const tiers = [
-        { name: 'Scout', range: '0-300', benefits: 'Basic Access', color: 'text-zinc-500', bg: 'bg-zinc-500/10' },
-        { name: 'Explorer', range: '300-600', benefits: '1.2x Yield', color: 'text-blue-400', bg: 'bg-blue-500/10' },
-        { name: 'Connector', range: '600-850', benefits: 'Pro Features', color: 'text-tivi-purple', bg: 'bg-tivi-purple/10', active: true },
-        { name: 'Luminary', range: '850+', benefits: 'Rev Share', color: 'text-amber-400', bg: 'bg-amber-500/10' },
-    ];
+
 
     return (
         <section ref={ref} className="section-padding bg-black relative overflow-hidden">
             <div className="max-w-[1100px] mx-auto px-6">
                 <div className="flex flex-col md:flex-row gap-16 items-center">
 
-                    {/* Left: visual gauge */}
-                    <div className="flex-1 relative">
-                        <div className="relative w-[300px] h-[300px] mx-auto">
-                            {/* Outer Rings */}
-                            <motion.div
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                                className="absolute inset-0 rounded-full border border-tivi-purple/20 border-dashed"
-                            />
-                            <motion.div
-                                animate={{ rotate: -360 }}
-                                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                                className="absolute inset-4 rounded-full border border-white/5"
+                    {/* Left: Tivi Score Visual (Ported from Video) */}
+                    <div className="flex-1 relative flex justify-center">
+                        <div className="relative w-[340px] h-[340px]">
+                            {/* Background Image Asset */}
+                            <img
+                                src="/tivi-score-ui.png"
+                                alt="Tivi Score Gauge"
+                                className="absolute inset-0 w-full h-full object-contain animate-spin-slow"
+                                style={{ animationDuration: '30s' }}
                             />
 
-                            {/* Center Score */}
+                            {/* Score Display */}
                             <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
                                 <motion.span
-                                    initial={{ scale: 0.5, opacity: 0 }}
+                                    initial={{ scale: 0.8, opacity: 0 }}
                                     animate={inView ? { scale: 1, opacity: 1 } : {}}
+                                    transition={{ duration: 0.8, ease: "backOut" }}
                                     className="text-7xl font-bold text-white tracking-tighter"
                                 >
-                                    {score}
+                                    <motion.span>{rounded}</motion.span>
                                 </motion.span>
-                                <span className="text-zinc-500 font-medium mt-2 uppercase tracking-widest text-sm">Tivi Score</span>
-                            </div>
-
-                            {/* Glowing Background */}
-                            <div className="absolute inset-0 bg-tivi-purple/20 blur-[60px] rounded-full" />
-                        </div>
-
-                        {/* Tiers List */}
-                        <div className="grid grid-cols-2 gap-3 mt-10">
-                            {tiers.map((tier, i) => (
-                                <motion.div
-                                    key={i}
+                                <motion.span
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={inView ? { opacity: 1, y: 0 } : {}}
-                                    transition={{ delay: 0.4 + (i * 0.1) }}
-                                    className="relative group rounded-xl overflow-hidden"
-                                    onMouseMove={(e) => {
-                                        const rect = e.currentTarget.getBoundingClientRect();
-                                        e.currentTarget.style.setProperty('--x', `${e.clientX - rect.left}px`);
-                                        e.currentTarget.style.setProperty('--y', `${e.clientY - rect.top}px`);
-                                    }}
+                                    transition={{ delay: 0.4 }}
+                                    className="text-tivi-purple font-semibold text-sm uppercase tracking-[0.2em] mt-2"
                                 >
-                                    {/* Magic Border */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/0 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                    <div
-                                        className="absolute inset-[1px] rounded-xl bg-zinc-900 z-10"
-                                        style={{
-                                            background: tier.active ? 'rgba(76, 29, 149, 0.2)' : 'rgba(24, 24, 27, 0.9)'
-                                        }}
-                                    />
-
-                                    {/* Spotlight */}
-                                    <div
-                                        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
-                                        style={{
-                                            background: `radial-gradient(400px circle at var(--x) var(--y), rgba(255, 255, 255, 0.15), transparent 40%)`
-                                        }}
-                                    />
-
-                                    {/* Content */}
-                                    <div className={`relative z-20 p-3 h-full border border-transparent ${tier.active ? 'border-tivi-purple/50' : 'border-white/5'} rounded-xl`}>
-                                        <div className="flex justify-between items-center mb-1">
-                                            <span className={`text-xs font-bold ${tier.color}`}>{tier.name}</span>
-                                            {tier.active && <Zap className="w-3 h-3 text-tivi-purple fill-current" />}
-                                        </div>
-                                        <div className="text-white font-medium text-sm">{tier.benefits}</div>
-                                        {tier.active && (
-                                            <div className="absolute -right-2 -top-2 w-8 h-8 bg-tivi-purple/20 blur-xl rounded-full" />
-                                        )}
-                                    </div>
-                                </motion.div>
-                            ))}
+                                    Tivi Score
+                                </motion.span>
+                            </div>
                         </div>
                     </div>
 

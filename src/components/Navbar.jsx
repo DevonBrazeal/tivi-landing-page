@@ -10,11 +10,17 @@ export default function Navbar() {
     }, []);
 
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-black/80 backdrop-blur-xl' : 'bg-transparent'
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-black' : 'bg-transparent'
             }`}>
             <div className="max-w-[980px] mx-auto px-6">
-                <div className="flex items-center justify-between h-12">
-                    <a href="#" className="text-white font-semibold text-xl tracking-tight">Tivi</a>
+                <div className="flex items-center justify-between h-24">
+                    <a href="#" className="flex items-center gap-3 group">
+                        <img
+                            src="/tivi-logo.png"
+                            alt="Tivi"
+                            className="h-16 w-auto object-contain"
+                        />
+                    </a>
                     <div className="hidden md:flex items-center gap-8">
                         <a href="#modes" className="text-white/80 hover:text-white transition-colors text-sm">Modes</a>
                         <a href="#earn" className="text-white/80 hover:text-white transition-colors text-sm">Earn</a>
