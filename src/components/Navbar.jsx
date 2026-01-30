@@ -14,12 +14,13 @@ export default function Navbar() {
             }`}>
             <div className="max-w-[980px] mx-auto px-6">
                 <div className="flex items-center justify-between h-24">
-                    <a href="#" className="flex items-center gap-3 group">
+                    <a href="#" className="flex items-center gap-4 group">
                         <img
                             src="tivi-logo.png"
                             alt="Tivi"
                             className="h-16 w-auto object-contain"
                         />
+                        <span className="text-white font-semibold text-2xl tracking-tight">Tivi</span>
                     </a>
                     <div className="hidden md:flex items-center gap-8">
                         <a href="#modes" className="text-white/80 hover:text-white transition-colors text-sm">Modes</a>
