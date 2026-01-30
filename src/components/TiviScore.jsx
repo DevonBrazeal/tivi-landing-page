@@ -25,35 +25,16 @@ export default function TiviScore() {
                 <div className="flex flex-col md:flex-row gap-16 items-center">
 
                     {/* Left: Tivi Score Visual (Ported from Video) */}
+                    {/* Left: Tivi Score Visual */}
                     <div className="flex-1 relative flex justify-center">
-                        <div className="relative w-[340px] h-[340px]">
-                            {/* Background Image Asset */}
+                        <div className="relative w-[650px] h-[650px] scale-110">
+                            {/* Background Image Asset - now acting as the sole visual */}
                             <img
                                 src="tivi-score-ui.png"
                                 alt="Tivi Score Gauge"
                                 className="absolute inset-0 w-full h-full object-contain animate-spin-slow"
                                 style={{ animationDuration: '30s' }}
                             />
-
-                            {/* Score Display */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-                                <motion.span
-                                    initial={{ scale: 0.8, opacity: 0 }}
-                                    animate={inView ? { scale: 1, opacity: 1 } : {}}
-                                    transition={{ duration: 0.8, ease: "backOut" }}
-                                    className="text-7xl font-bold text-white tracking-tighter"
-                                >
-                                    <motion.span>{rounded}</motion.span>
-                                </motion.span>
-                                <motion.span
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                                    transition={{ delay: 0.4 }}
-                                    className="text-tivi-purple font-semibold text-sm uppercase tracking-[0.2em] mt-2"
-                                >
-                                    Tivi Score
-                                </motion.span>
-                            </div>
                         </div>
                     </div>
 
