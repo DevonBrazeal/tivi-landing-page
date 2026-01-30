@@ -1,76 +1,116 @@
 import { motion } from 'framer-motion';
 import MagnetizeButton from './MagnetizeButton';
-import { Play, MapPin, Users, Calendar } from 'lucide-react';
-
 // Activity Cards Data
+import { Play, MapPin, Users, Calendar, Award, ShoppingBag, Palette, Flame, Video, Wine, Timer, Brain, Utensils, Music } from 'lucide-react';
+
 const activities = [
     {
-        title: "Sunrise Yoga",
-        image: `${import.meta.env.BASE_URL}images/activity_yoga.png`,
-        tag: "Wellness",
-        tagColor: "bg-emerald-500",
-        attendees: 12,
-        location: "City Park"
+        title: "NY Sunset Helicopter",
+        image: `${import.meta.env.BASE_URL}images/activity_golden.png`,
+        tag: "Golden Ticket",
+        tagColor: "bg-amber-500",
+        attendees: 2,
+        location: "Manhattan Heliport",
+        isGolden: true,
+        desc: "Values at $3,000 • Michelin Star Dinner Included"
     },
     {
-        title: "3v3 Basketball",
-        image: `${import.meta.env.BASE_URL}images/activity_basketball.png`,
-        tag: "Sports",
-        tagColor: "bg-tivi-purple",
-        attendees: 6,
-        location: "Venice Courts"
+        title: "Farmers Market",
+        image: `${import.meta.env.BASE_URL}images/activity_farmers_market.png`,
+        tag: "Community",
+        tagColor: "bg-green-600",
+        attendees: 45,
+        location: "Downtown Square"
     },
     {
-        title: "Jazz Night",
-        image: `${import.meta.env.BASE_URL}images/activity_jazz.png`,
-        tag: "Social",
-        tagColor: "bg-rose-500",
-        attendees: 24,
-        location: "Blue Note"
+        title: "Art Gallery Open",
+        image: `${import.meta.env.BASE_URL}images/activity_art_gallery.png`,
+        tag: "Culture",
+        tagColor: "bg-purple-600",
+        attendees: 120,
+        location: "SoHo District"
     },
     {
-        title: "Sourdough Class",
-        image: `${import.meta.env.BASE_URL}images/activity_cooking.png`,
-        tag: "Learning",
-        tagColor: "bg-blue-500",
+        title: "Welding Workshop",
+        image: `${import.meta.env.BASE_URL}images/activity_welding.png`,
+        tag: "Skills",
+        tagColor: "bg-orange-600",
         attendees: 8,
-        location: "Community Center"
+        location: "Industrial Park"
     },
     {
-        title: "Hiking Meetup",
-        image: `${import.meta.env.BASE_URL}images/activity_hiking.png`,
-        tag: "Adventure",
-        tagColor: "bg-orange-500",
+        title: "Grandma's Wisdom",
+        image: `${import.meta.env.BASE_URL}images/activity_virtual_wisdom.png`,
+        tag: "Virtual",
+        tagColor: "bg-blue-600",
+        attendees: 342,
+        location: "Live Stream"
+    },
+    {
+        title: "Sip & Paint Date",
+        image: `${import.meta.env.BASE_URL}images/activity_sip_paint.png`,
+        tag: "Social",
+        tagColor: "bg-rose-600",
+        attendees: 24,
+        location: "The Canvas Bar"
+    },
+    {
+        title: "Morning 5K Run",
+        image: `${import.meta.env.BASE_URL}images/activity_run_club.png`,
+        tag: "Fitness",
+        tagColor: "bg-cyan-600",
+        attendees: 85,
+        location: "Beach Boardwalk"
+    },
+    {
+        title: "Chess in Park",
+        image: `${import.meta.env.BASE_URL}images/activity_chess_park.png`,
+        tag: "Strategy",
+        tagColor: "bg-amber-700",
+        attendees: 16,
+        location: "Washington Sq"
+    },
+    {
+        title: "Pasta Making",
+        image: `${import.meta.env.BASE_URL}images/activity_pasta_class.png`,
+        tag: "Cooking",
+        tagColor: "bg-red-600",
         attendees: 15,
-        location: "Griffith Park"
+        location: "Little Italy"
     },
-    {
-        title: "Pottery Workshop",
-        image: `${import.meta.env.BASE_URL}images/activity_pottery.png`,
-        tag: "Creative",
-        tagColor: "bg-indigo-500",
-        attendees: 10,
-        location: "Clay Studio"
-    }
 ];
 
 const ActivityCard = ({ activity }) => (
-    <div className="relative w-[280px] h-[360px] flex-shrink-0 rounded-3xl overflow-hidden group">
-        <img
-            src={activity.image}
-            alt={activity.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
+    <div className={`relative w-[280px] h-[360px] flex-shrink-0 rounded-3xl overflow-hidden group ${activity.isGolden ? 'ring-4 ring-amber-300 shadow-[0_0_50px_rgba(251,191,36,0.4)] scale-105 z-10' : ''}`}>
+        {activity.image ? (
+            <img
+                src={activity.image}
+                alt={activity.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+        ) : (
+            <div className={`w-full h-full bg-gradient-to-br ${activity.gradient} flex items-center justify-center`}>
+                <activity.icon className="w-24 h-24 text-white/20 transform group-hover:scale-110 transition-transform duration-700" />
+            </div>
+        )}
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
         <div className="absolute top-4 left-4">
-            <span className={`${activity.tagColor} text-white text-xs font-bold px-3 py-1 rounded-full`}>
+            <span className={`${activity.tagColor} text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg`}>
                 {activity.tag}
             </span>
         </div>
 
+        {activity.isGolden && (
+            <div className="absolute top-4 right-4 animate-pulse">
+                <Award className="w-8 h-8 text-amber-300 drop-shadow-lg" />
+            </div>
+        )}
+
         <div className="absolute bottom-0 left-0 right-0 p-5">
-            <h3 className="text-white font-bold text-xl mb-2">{activity.title}</h3>
+            <h3 className={`font-bold text-xl mb-1 ${activity.isGolden ? 'text-amber-300' : 'text-white'}`}>{activity.title}</h3>
+            {activity.desc && <p className="text-white/90 text-sm font-medium mb-2">{activity.desc}</p>}
             <div className="flex items-center gap-4 text-white/80 text-xs">
                 <span className="flex items-center gap-1">
                     <MapPin className="w-3 h-3" /> {activity.location}
