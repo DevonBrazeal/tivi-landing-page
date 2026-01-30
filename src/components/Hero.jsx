@@ -78,6 +78,54 @@ const activities = [
         attendees: 15,
         location: "Little Italy"
     },
+    {
+        title: "Sunrise Yoga",
+        image: `${import.meta.env.BASE_URL}images/activity_yoga.png`,
+        tag: "Wellness",
+        tagColor: "bg-emerald-500",
+        attendees: 12,
+        location: "City Park"
+    },
+    {
+        title: "3v3 Basketball",
+        image: `${import.meta.env.BASE_URL}images/activity_basketball.png`,
+        tag: "Sports",
+        tagColor: "bg-tivi-purple",
+        attendees: 6,
+        location: "Venice Courts"
+    },
+    {
+        title: "Jazz Night",
+        image: `${import.meta.env.BASE_URL}images/activity_jazz.png`,
+        tag: "Social",
+        tagColor: "bg-rose-500",
+        attendees: 24,
+        location: "Blue Note"
+    },
+    {
+        title: "Sourdough Class",
+        image: `${import.meta.env.BASE_URL}images/activity_cooking.png`,
+        tag: "Learning",
+        tagColor: "bg-blue-500",
+        attendees: 8,
+        location: "Community Center"
+    },
+    {
+        title: "Hiking Meetup",
+        image: `${import.meta.env.BASE_URL}images/activity_hiking.png`,
+        tag: "Adventure",
+        tagColor: "bg-orange-500",
+        attendees: 15,
+        location: "Griffith Park"
+    },
+    {
+        title: "Pottery Workshop",
+        image: `${import.meta.env.BASE_URL}images/activity_pottery.png`,
+        tag: "Creative",
+        tagColor: "bg-indigo-500",
+        attendees: 10,
+        location: "Clay Studio"
+    }
 ];
 
 const ActivityCard = ({ activity }) => (
@@ -188,8 +236,8 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className="text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed"
                 >
-                    The world's first social protocol that pays you to touch grass. <br className="hidden sm:block" />
-                    <span className="text-white font-medium">Stop swiping. Start living.</span>
+                    The world's first social protocol that pays you to live. <br className="hidden sm:block" />
+                    <span className="text-white font-medium">Stop swiping. Start Living.</span>
                 </motion.p>
 
                 {/* Magnetize CTAs */}
