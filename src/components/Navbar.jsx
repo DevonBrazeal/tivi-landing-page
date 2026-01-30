@@ -16,7 +16,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between h-24">
                     <a href="#" className="flex items-center gap-3 group">
                         <img
-                            src="/tivi-logo.png"
+                            src="tivi-logo.png"
                             alt="Tivi"
                             className="h-16 w-auto object-contain"
                         />

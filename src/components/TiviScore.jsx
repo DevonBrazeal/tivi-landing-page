@@ -29,7 +29,7 @@ export default function TiviScore() {
                         <div className="relative w-[340px] h-[340px]">
                             {/* Background Image Asset */}
                             <img
-                                src="/tivi-score-ui.png"
+                                src="tivi-score-ui.png"
                                 alt="Tivi Score Gauge"
                                 className="absolute inset-0 w-full h-full object-contain animate-spin-slow"
                                 style={{ animationDuration: '30s' }}
